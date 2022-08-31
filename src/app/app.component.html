@@ -1,0 +1,105 @@
+<h1>Sensor Setup: {{deviceName}}</h1>
+
+<table>
+    <tr>
+        <td>ioT Device: </td>
+        <td>
+
+                <input
+                id="topicname"
+                [(ngModel)]="inputs.topicname"
+                class="input"
+                placeholder="Topic Name"
+                (focus)="onInputFocus($event)"
+                (change)="onInputChange($event)"
+                (blur)="onInputBlur($event)"
+              />
+
+        </td>
+        <td><button mat-raised-button color="primary" type="button" (click)="subscribeNewTopic()">Subscribe Topic</button></td>
+    </tr>
+    <tr>
+        <td>Location: </td>
+        <td>
+
+                <input
+                id="msg"
+                [(ngModel)]="inputs.msg"
+                class="input"
+                placeholder="Msg Sent"
+                (focus)="onInputFocus($event)"
+                (change)="onInputChange($event)"
+                (blur)="onInputBlur($event)"
+              />
+
+        </td>
+        <td><button mat-raised-button color="accent" type="button" (click)="sendmsg()">Send</button></td>
+    </tr>
+    <tr>
+        <td>Device ID: </td>
+        <td>
+
+                <input
+                id="units"
+                [(ngModel)]="inputs.units"
+                class="input"
+                placeholder="Change Units"
+                (focus)="onInputFocus($event)"
+                (change)="onInputChange($event)"
+                (blur)="onInputBlur($event)"
+              />
+
+        </td>
+        <td><button mat-fab color="accent" type="button" (click)="changeUnits()">Change</button></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>&nbsp;&nbsp;<button mat-raised-button color="warn" type="button" (click)="clear()">Clear Log</button></td>
+        <td></td>
+    </tr>
+</table>
+<div style="text-align:center" [ngClass]="!show ? 'hide-keyboard' : ''">
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="simple-keyboard"></div>
+</div>
+<mat-form-field appearance="fill">
+  <mat-label>Choose a date</mat-label>
+<!-- #docregion toggle -->
+  <input matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+<!-- #enddocregion toggle -->
+</mat-form-field>
+<div><a href="http://192.168.0.43:1880/ui"><h1>Go Home</h1></a>
+</div>
+           <div>
+
+                <div className="d1">
+                    <div>Last msg Received:</div>
+                    <div> {{ state.msgRecvd | json }} </div>
+                    <div>Number of Msgs Received: {{ state.msgsReceived  }} </div>
+                </div>
+
+                <div className="d1">
+                    <div>last Ctl Msg Received:</div>
+                    <div> {{state.msgCtrl | json }} </div>
+                    <div>Number of Control Msgs Received: {{ state.msgsControl }}</div>
+                </div>
+
+                <div className="d1">
+                    <div>last Msg Sent</div>
+                    <div> {{ state.msgSent | json }} </div>
+                    <div>Number of msgs Sent: {{ state.msgsSent }}</div>
+                </div>
+
+                <div className="d1">
+                    <div>Socket Connected?: {{ state.socketConnectedState }}</div>
+                    <div>uibuilderfe Version: {{ state.feVersion }}</div>
+                    <div>Server Time Offset from browser: {{ state.serverTimeOffset }}</div>
+                </div>
+
+</div>
+
+<br /><br />
+<div #msglog>
+</div>
